@@ -17,7 +17,7 @@ defmodule ExunitFixturesTest do
   end
 
   deffixture ref do
-    make_ref
+    make_ref()
   end
 
   deffixture ref_child1(ref) do
@@ -79,7 +79,7 @@ defmodule ExunitFixturesTest do
   end
 
   test "deffixture generates a function that can create a fixture" do
-    assert simple == "simple"
+    assert simple() == "simple"
   end
 
   test "deffixture adds the fixture to @fixtures" do

@@ -44,7 +44,7 @@ defmodule ExUnitFixtures.Imp.Preprocessing do
 
     local_fixtures
     |> hide_fixtures(imported_fixtures)
-    |> Dict.merge(resolved_locals)
+    |> Map.merge(resolved_locals)
   end
 
   @doc """
@@ -101,7 +101,7 @@ defmodule ExUnitFixtures.Imp.Preprocessing do
     names_to_hide = for f <- local_fixtures, into: MapSet.new, do: f.name
 
     for {name, f} <- imported_fixtures, into: %{} do
-      if Set.member?(names_to_hide, f.name) do
+      if MapSet.member?(names_to_hide, f.name) do
         {name, %{f | hidden: true}}
       else
         {name, f}
@@ -112,7 +112,7 @@ defmodule ExUnitFixtures.Imp.Preprocessing do
   @spec fixtures_from_modules([:atom]) :: fixture_dict
   defp fixtures_from_modules(modules) do
     imported_fixtures = for module <- modules, do: module.fixtures
-    Enum.reduce imported_fixtures, %{}, &Dict.merge/2
+    Enum.reduce imported_fixtures, %{}, &Map.merge/2
   end
 
   @spec validate_dep(FixtureDef.t, FixtureDef.t) :: :ok | no_return

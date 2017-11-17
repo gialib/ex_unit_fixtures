@@ -125,7 +125,7 @@ defmodule ExUnitFixtures do
   """
 
   alias ExUnitFixtures.FixtureDef
-  alias ExUnitFixtures.SessionFixtureStore
+  # alias ExUnitFixtures.SessionFixtureStore
 
   @doc """
   Starts the ExUnitFixtures application.
@@ -267,8 +267,8 @@ defmodule ExUnitFixtures do
       """
     end
 
-    scope = Dict.get(opts, :scope, :test)
-    autouse = Dict.get(opts, :autouse, false)
+    scope = Keyword.get(opts, :scope, :test)
+    autouse = Keyword.get(opts, :autouse, false)
 
     unless scope in [:test, :module, :session] do
       raise "Unknown scope: #{scope}"
@@ -336,7 +336,7 @@ defmodule ExUnitFixtures do
 
       setup_all do
         {:ok, module_store} = ExUnitFixtures.Imp.FixtureStore.start_link
-        module_ref = make_ref
+        module_ref = make_ref()
 
         ExUnitFixtures.Teardown.register_pid(module_ref, module_store)
 

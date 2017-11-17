@@ -45,7 +45,7 @@ defmodule FixtureModuleTest do
   end
 
   test "that a test without fixtures works", context do
-    refute Dict.has_key?(context, :simple)
+    refute Map.has_key?(context, :simple)
   end
 
   test "that we have an imported_fixtures module attribute" do

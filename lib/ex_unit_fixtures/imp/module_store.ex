@@ -15,7 +15,7 @@ defmodule ExUnitFixtures.Imp.ModuleStore do
   """
   @spec register(atom, String.t) :: :ok
   def register(module, file) do
-    check_server_running
+    check_server_running()
 
     Agent.update __MODULE__, fn modules ->
       [{module, file} | modules]
@@ -27,7 +27,7 @@ defmodule ExUnitFixtures.Imp.ModuleStore do
   """
   @spec find_file(String.t) :: [:atom]
   def find_file(filename) do
-    check_server_running
+    check_server_running()
 
     filename = Path.absname(filename)
     Agent.get __MODULE__, fn state ->
@@ -40,7 +40,7 @@ defmodule ExUnitFixtures.Imp.ModuleStore do
   """
   @spec find_module(:atom) :: String.t
   def find_module(search_module) do
-    check_server_running
+    check_server_running()
 
     __MODULE__
     |> Agent.get(fn state ->

@@ -4,7 +4,7 @@ defmodule ExUnitFixtures.TeardownTest do
   alias ExUnitFixtures.Teardown
 
   test "module scoped teardown process" do
-    ref = make_ref
+    ref = make_ref()
     {:ok, agent} = Agent.start_link(fn -> false end)
     Teardown.register_pid(ref)
 
